@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: #fff;
+    font-family: 'Sofia Sans SemiCondensed', Arial, sans-serif;
+}
+.storm-reports-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px 0;
+    background: rgba(0,0,0,0.3);
+    border-radius: 12px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+.storm-report {
+    margin-bottom: 18px;
+    padding: 14px 18px;
+    background: rgba(30,30,30,0.85);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    font-size: 1.1em;
+    line-height: 1.5;
+}
+.report-title {
+    font-size: 1.2em;
+    margin-bottom: 4px;
+    color: #ffd700;
+}
+.report-location {
+    color: #aee7ff;
+}
+.report-time {
+    font-size: 0.95em;
+    color: #ccc;
+    margin-bottom: 6px;
+}
+.report-description {
+    font-size: 1.05em;
+    color: #fff;
+    word-break: break-word;
+}
