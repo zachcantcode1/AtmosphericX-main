@@ -20,7 +20,10 @@
                     element.innerHTML = 'No storm reports available.';
                     return;
                 }
-                let text = reports.slice(0, 10).map(report => report.description).join(' | ');
+                // Remove all line breaks from each description
+                let text = reports.slice(0, 10)
+                    .map(report => report.description.replace(/(\r\n|\n|\r)/gm, ' '))
+                    .join(' | ');
                 element.innerHTML = text;
             }
             renderReports();
