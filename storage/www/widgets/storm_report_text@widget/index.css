@@ -18,7 +18,6 @@ body {
     font-family: 'Sofia Sans SemiCondensed', Arial, sans-serif;
     width: 100vw;
     box-sizing: border-box;
-    white-space: normal;
-    overflow-x: visible;
-    overflow-y: visible;
+    white-space: nowrap;
+    overflow: visible;
 }
