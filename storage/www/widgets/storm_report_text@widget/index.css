@@ -4,7 +4,7 @@ body {
     background: transparent;
 }
 .text {
-    font-size: 15px !important;
+    font-size: 30px !important;
     line-height: var(--alert-description-widget-line-height);
     text-align: var(--alert-description-widget-align);
     color: var(--alert-description-widget-color);
