@@ -20,9 +20,14 @@
                     element.innerHTML = 'No storm reports available.';
                     return;
                 }
-                // Remove all line breaks from each description
+                // Remove all line breaks from each description and format the output
                 let text = reports.slice(0, 10)
-                    .map(report => report.description.replace(/(\r\n|\n|\r)/gm, ' '))
+                    .map(report => {
+                        const type = report.event || '';
+                        const location = report.location || '';
+                        const details = (report.description || '').replace(/(\r\n|\n|\r)/gm, ' ');
+                        return `[${type}] Location: ${location} | Details: ${details}`;
+                    })
                     .join(' | ');
                 element.innerHTML = text;
             }
