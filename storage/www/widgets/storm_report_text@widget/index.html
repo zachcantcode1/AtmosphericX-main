@@ -20,7 +20,7 @@
                     element.innerHTML = 'No storm reports available.';
                     return;
                 }
-                let text = reports.slice(0, 10).map(report => report.description).join('<br><br>');
+                let text = reports.slice(0, 10).map(report => report.description).join(' | ');
                 element.innerHTML = text;
             }
             renderReports();
