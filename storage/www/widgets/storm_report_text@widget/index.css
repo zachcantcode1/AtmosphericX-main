@@ -16,7 +16,8 @@ body {
     text-shadow: var(--alert-description-widget-shadow, 1px 1px 3px #00000069);
     background: transparent;
     font-family: 'Sofia Sans SemiCondensed', Arial, sans-serif;
-    width: 100vw;
+    width: max-content;
+    min-width: 100vw;
     box-sizing: border-box;
     white-space: nowrap;
     overflow: visible;
