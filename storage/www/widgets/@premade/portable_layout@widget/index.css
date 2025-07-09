@@ -1,8 +1,11 @@
-
 body {
     margin: 0;
     padding: 0;
     background-color: #000000;
     color: rgb(255, 255, 255);
     overflow: hidden;
+}
+
+body, body * {
+    font-family: Impact, Charcoal, sans-serif !important;
 }

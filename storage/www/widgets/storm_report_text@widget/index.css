@@ -23,6 +23,11 @@ body {
     max-width: none;
     text-overflow: clip;
 }
+
+.text, .text * {
+    font-family: Impact, Charcoal, sans-serif !important;
+}
+
 .alert-item {
   display: inline;
   margin-right: 0.5em;
