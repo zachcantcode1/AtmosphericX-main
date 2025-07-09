@@ -28,7 +28,7 @@
                         const details = (report.description || '').replace(/(\r\n|\n|\r)/gm, ' ');
                         return `[${type}] Location: ${location} | Details: ${details}`;
                     })
-                    .join(' | ');
+                    .join(' &nbsp;|&nbsp; ');
                 element.innerHTML = text;
             }
             renderReports();
