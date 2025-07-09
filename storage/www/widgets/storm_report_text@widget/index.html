@@ -7,26 +7,21 @@
     <script src="../../assets/javascript/library.js"></script>
     <script src="../../assets/javascript/alerts.js"></script>
     <body>
-        <div id="storm-reports-container" class="storm-reports-container">
-            <!-- Storm reports will be injected here -->
-        </div>
+        <p id="storm_report_text" class="text">Awaiting Callback...</p>
     </body>
     <script>
         let library = new Library()
         library.createWebsocketSession([`reports`]).then(() => {
             function renderReports() {
-                const container = document.getElementById('storm-reports-container');
-                container.innerHTML = '';
+                let element = document.getElementById('storm_report_text');
                 let reports = library.storage.reports || [];
                 reports.sort((a, b) => new Date(b.issued) - new Date(a.issued));
-                reports.slice(0, 10).forEach(report => {
-                    const div = document.createElement('div');
-                    div.className = 'storm-report';
-                    div.innerHTML = `<div class='report-title'><b>${report.event}</b> - <span class='report-location'>${report.location}</span></div>
-                        <div class='report-time'><span>Issued: ${report.issued}</span></div>
-                        <div class='report-description'>${report.description}</div>`;
-                    container.appendChild(div);
-                });
+                if (reports.length === 0) {
+                    element.innerHTML = 'No storm reports available.';
+                    return;
+                }
+                let text = reports.slice(0, 10).map(report => report.description).join('<br><br>');
+                element.innerHTML = text;
             }
             renderReports();
             document.addEventListener('onCacheUpdate', renderReports);
