@@ -21,15 +21,15 @@
                     return;
                 }
                 // Remove all line breaks from each description and format the output
-                let text = reports.slice(0, 10)
+                let alertHtml = reports.slice(0, 10)
                     .map(report => {
                         const type = report.event || '';
                         const location = report.location || '';
                         const details = (report.description || '').replace(/(\r\n|\n|\r)/gm, ' ');
-                        return `[${type}] Location: ${location} | Details: ${details}`;
+                        return `<span class="alert-item">[${type}] Location: ${location} | Details: ${details}</span>`;
                     })
-                    .join(' &nbsp;|&nbsp; ');
-                element.innerHTML = text;
+                    .join('<span class="alert-separator">|</span>');
+                element.innerHTML = alertHtml;
             }
             renderReports();
             document.addEventListener('onCacheUpdate', renderReports);

@@ -23,3 +23,16 @@ body {
     max-width: none;
     text-overflow: clip;
 }
+.alert-item {
+  display: inline;
+  margin-right: 0.5em;
+}
+
+.alert-separator {
+  display: inline;
+  margin: 0 1.5em;
+  color: var(--color-accent, #ffcc00);
+  font-weight: bold;
+  font-size: 1.2em;
+  vertical-align: middle;
+}
