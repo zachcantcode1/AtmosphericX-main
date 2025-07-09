@@ -36,3 +36,9 @@ body {
   font-size: 1.2em;
   vertical-align: middle;
 }
+
+.alert-type {
+  font-weight: bold;
+  color: var(--color-accent, #ffcc00);
+  margin-right: 0.3em;
+}

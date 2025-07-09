@@ -26,7 +26,7 @@
                         const type = report.event || '';
                         const location = report.location || '';
                         const details = (report.description || '').replace(/(\r\n|\n|\r)/gm, ' ');
-                        return `<span class="alert-item">[${type}] Location: ${location} | Details: ${details}</span>`;
+                        return `<span class="alert-item"><span class="alert-type">${type}</span> — Location: ${location} | Details: ${details}</span>`;
                     })
                     .join('<span class="alert-separator">|</span>');
                 element.innerHTML = alertHtml;
