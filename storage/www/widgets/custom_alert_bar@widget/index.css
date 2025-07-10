@@ -10,20 +10,33 @@ body, html {
 .alert-box {
     width: 1920px;
     height: 120px;
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    background: #ff0000;
+    position: relative;
+    background: linear-gradient(90deg, #ff6600 0%, #ffb347 100%);
     color: #fff;
     font-family: Impact, Charcoal, sans-serif;
     box-shadow: 0 2px 20px rgba(0,0,0,0.7);
     border-radius: 0;
     padding: 0;
     box-sizing: border-box;
-    position: relative;
+    border-top: 4px solid #222;
+    border-bottom: 2px solid #222;
+    overflow: hidden;
 }
 
-.alert-header {
+/* Overlay the main info bar */
+.alert-bar-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    z-index: 10;
+}
+
+.alert-bar-title {
     width: 400px;
     min-width: 320px;
     max-width: 600px;
@@ -31,26 +44,29 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background: #b30000;
+    background: #e65c00;
     color: #fff;
     font-size: 2.8em;
     font-weight: bold;
     padding-left: 24px;
     letter-spacing: 0.04em;
     text-shadow: 2px 2px 8px #00000099;
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
     box-sizing: border-box;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
-.alert-header span {
+.alert-bar-title span {
     display: block;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    width: 100%;
 }
 
-.alert-body {
+.alert-bar-info {
     flex: 1 1 auto;
     display: flex;
     flex-direction: row;
@@ -60,21 +76,26 @@ body, html {
     font-size: 2em;
     padding-left: 40px;
     background: transparent;
-    box-shadow: none;
-    border: none;
     height: 100%;
 }
 
-.row-dark, .row-light {
-    display: contents;
-}
-
-.alert-location, .alert-hail, .alert-wind {
+.alert-bar-info .alert-location, .alert-bar-info .alert-hail, .alert-bar-info .alert-wind {
     font-weight: bold;
     color: #fff;
     text-shadow: 1px 1px 6px #00000099;
     margin-right: 0;
     white-space: nowrap;
+}
+
+/* Hide all original rows and fields visually except the overlay */
+.alert-header, .alert-body, .row-dark, .row-light, .left, .right {
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
 }
 
 /* Hide all unused fields */
