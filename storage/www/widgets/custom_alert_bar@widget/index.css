@@ -37,9 +37,11 @@ body, html {
 }
 
 .alert-bar-title {
-    width: 400px;
+    /* Allow the title to grow and shrink as needed */
+    flex: 2 1 0;
     min-width: 320px;
-    max-width: 600px;
+    max-width: none;
+    width: auto;
     height: 100%;
     display: flex;
     align-items: center;
