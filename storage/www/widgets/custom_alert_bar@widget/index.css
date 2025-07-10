@@ -37,7 +37,7 @@ body, html {
     box-shadow: none;
 }
 
-.alert-body.linear-row {
+.alert-body {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -50,13 +50,33 @@ body, html {
     padding: 0;
 }
 
+/* Only show the fields we want */
+.row-dark, .row-light {
+    display: flex;
+    align-items: center;
+    background: none !important;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    font-size: inherit;
+    color: inherit;
+}
+
+/* Hide all unused fields */
+#event-issued-time, #event-tornado, #event-damage, #event-expires-time, #event-sender, #event-tags {
+    display: none !important;
+}
+
+/* Hide the row if it only contains hidden fields */
+.row-dark:not(:first-child), .row-light:not(:first-child) {
+    display: none !important;
+}
+
 .alert-location, .alert-hail, .alert-wind {
     font-weight: bold;
     color: #fff;
     text-shadow: 1px 1px 6px #00000099;
-}
-
-/* Hide unused fields if present */
-#event-issued-time, #event-tornado, #event-damage, #event-expires-time, #event-sender, #event-tags {
-    display: none !important;
+    margin-right: 60px;
 }

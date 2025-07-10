@@ -11,10 +11,42 @@
     <body>
         <div class="alert-box">
             <div class="alert-header"><span id="event-name"></span></div>
-            <div class="alert-body linear-row">
-                <div class="alert-location">Location: <span id="event-locations"></span></div>
-                <div class="alert-hail">Hail: <span id="event-max-hail"></span></div>
-                <div class="alert-wind">Wind: <span id="event-max-wind"></span></div>
+            <div class="alert-body">
+                <div class="row-dark">
+                    <div class="left">
+                        <div>Location: <span id="event-locations"></span></div>
+                    </div>
+                    <div class="right">
+                        <div id="event-issued-time"></div>
+                    </div>
+                </div>
+                <div class="row-light">
+                    <div class="left">
+                        <div>Hail: <span id="event-max-hail"></span></div>
+                    </div>
+                    <div class="left">
+                        <div>Wind: <span id="event-max-wind"></span></div>
+                    </div>
+                    <div class="left">
+                        <div id="event-tornado"></div>
+                    </div>
+                    <div class="right">
+                        <div id="event-damage"></div>
+                    </div>
+                    <div class="right">
+                        <div id="event-expires-time"></div>
+                    </div>
+                </div>
+                <div class="row-dark">
+                    <div class="left">
+                        <div id="event-sender"></div>
+                    </div>
+                </div>
+                <div class="row-light">
+                    <div class="left">
+                        <div id="event-tags"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
