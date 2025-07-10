@@ -2,62 +2,58 @@
 <html>
     <title>AtmosphericX</title>
     <link rel="icon" href="/assets/media/dashboard/favicon.ico" type="image/x-icon">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
     <link rel="stylesheet" href="../widgets/alert_bar@widget/index.css">
     <link rel="stylesheet" href="../../assets/styles/variables.css">
-    <script src="../../assets/javascript/alerts.js"></script>
-    <script src="../../assets/javascript/library.js"></script>
     <body>
-        <div class="alert-box">
-            <div class="alert-header"><span id="event-name"></span></div>
-            <div class="alert-body">
-                <div class="row-dark">
-                    <div class="left">
-                        <div>LOCATIONS INCLUDE: <span id="event-locations"></span></div>
-                    </div>
-                    <div class="right">
-                        <div>ISSUED: <span id="event-issued-time"></span></div>
-                    </div>
+        <div class="alert-bar-stream">
+            <div class="alert-bar-header">
+                <span id="event-name"></span>
+            </div>
+            <div class="alert-bar-details">
+                <div class="alert-bar-section locations">
+                    <span class="label">LOCATIONS:</span>
+                    <span id="event-locations"></span>
                 </div>
-                <div class="row-light">
-                    <div class="left">
-                        <div>HAIL: <span id="event-max-hail"></span></div>
-                    </div>
-                    <div class="left">
-                        <div>WIND: <span id="event-max-wind"></span></div>
-                    </div>
-                    <div class="left">
-                        <div>TOR: <span id="event-tornado"></span></div>
-                    </div>
-                    <div class="right">
-                        <div>DMG: <span id="event-damage"></span></div>
-                    </div>
-                    <div class="right">
-                        <div>EXPIRES: <span id="event-expires-time"></span></div>
-                    </div>
+                <div class="alert-bar-section threats">
+                    <span class="label">THREATS:</span>
+                    <span id="event-threats"></span>
                 </div>
-                <div class="row-dark">
-                    <div class="left">
-                        <div>OFFICE: <span id="event-sender"></span></div>
-                    </div>
-                </div>
-                <div class="row-light">
-                    <div class="left">
-                        <div>TAGS: <span id="event-tags"></span></div>
-                    </div>
+                <div class="alert-bar-section source">
+                    <span class="label">SOURCE:</span>
+                    <span id="event-source"></span>
                 </div>
             </div>
         </div>
     </body>
+    <script src="../../assets/javascript/alerts.js"></script>
+    <script src="../../assets/javascript/library.js"></script>
     <script>
-        let library = new Library()
+        let library = new Library();
         library.createWebsocketSession([`public`, `active`, `manual`]).then(() => {
-            let alert_class = new Alerts(library, true)
-            library.detectMobileDevice() 
-            document.addEventListener('onCacheUpdate', async (event) => {
-                let storage = alert_class.syncAlerts()
-                if (storage.length > 0) { await alert_class.triggerAlertQueue() }
-            })
-        })
+            let alert_class = new Alerts(library, true);
+            library.detectMobileDevice();
+            function updateAlertBar() {
+                // Get the most recent alert from the websocket storage
+                let storage = alert_class.syncAlerts();
+                if (!storage || storage.length === 0) return;
+                let alert = storage[0];
+                // Set alert type (event name)
+                document.getElementById('event-name').textContent = (alert.event || '').toUpperCase();
+                // Set locations (join with bullet or dot)
+                let locations = Array.isArray(alert.locations) ? alert.locations.join(' • ') : (alert.locations || '');
+                document.getElementById('event-locations').textContent = locations.toUpperCase();
+                // Set threats (combine wind/hail/tornado/damage if available)
+                let threats = [];
+                if (alert.max_wind) threats.push(alert.max_wind);
+                if (alert.max_hail) threats.push(alert.max_hail);
+                if (alert.tornado) threats.push(alert.tornado);
+                if (alert.damage) threats.push(alert.damage);
+                document.getElementById('event-threats').textContent = (threats.join(' AND ') || (alert.threats || '')).toUpperCase();
+                // Set source
+                document.getElementById('event-source').textContent = (alert.source || alert.sender || '').toUpperCase();
+            }
+            updateAlertBar();
+            document.addEventListener('onCacheUpdate', updateAlertBar);
+        });
     </script>
 </html>
