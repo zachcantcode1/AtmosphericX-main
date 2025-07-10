@@ -87,7 +87,8 @@ body, html {
     white-space: nowrap;
 }
 
-/* Hide all original rows and fields visually except the overlay */
+/* Remove the following rule to restore original DOM structure for JS compatibility */
+/*
 .alert-header, .alert-body, .row-dark, .row-light, .left, .right {
     visibility: hidden !important;
     height: 0 !important;
@@ -97,6 +98,7 @@ body, html {
     margin: 0 !important;
     overflow: hidden !important;
 }
+*/
 
 /* Hide all unused fields */
 #event-issued-time, #event-tornado, #event-damage, #event-expires-time, #event-sender, #event-tags {
