@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Custom Alert Bar</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="../../assets/styles/variables.css">
+        <script src="../../assets/javascript/alerts.js"></script>
+        <script src="../../assets/javascript/library.js"></script>
+    </head>
+    <body>
+        <div class="custom-alert-bar">
+            <div class="alert-type" id="custom-alert-type">ALERT</div>
+            <div class="alert-details">
+                <div class="alert-locations" id="custom-alert-locations">Locations</div>
+                <div class="alert-hazards">
+                    <span class="hazard" id="custom-alert-hail">Hail: --</span>
+                    <span class="hazard" id="custom-alert-wind">Wind: --</span>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        let library = new Library();
+        library.createWebsocketSession([`public`, `active`, `manual`]).then(() => {
+            let alert_class = new Alerts(library, true);
+            library.detectMobileDevice();
+            document.addEventListener('onCacheUpdate', async (event) => {
+                let storage = alert_class.syncAlerts();
+                if (storage.length > 0) {
+                    // Use the most recent alert
+                    const alert = storage[0];
+                    document.getElementById('custom-alert-type').textContent = alert.event || 'ALERT';
+                    document.getElementById('custom-alert-locations').textContent = alert.location || 'Locations';
+                    document.getElementById('custom-alert-hail').textContent = 'Hail: ' + (alert.max_hail || '--');
+                    document.getElementById('custom-alert-wind').textContent = 'Wind: ' + (alert.max_wind || '--');
+                }
+            });
+        });
+    </script>
+</html>
