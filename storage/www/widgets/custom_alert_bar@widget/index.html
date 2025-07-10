@@ -10,12 +10,12 @@
     </head>
     <body>
         <div class="custom-alert-bar">
-            <div class="alert-type" id="custom-alert-type">ALERT</div>
+            <div class="alert-type" id="event-name">ALERT</div>
             <div class="alert-details">
-                <div class="alert-locations" id="custom-alert-locations">Locations</div>
+                <div class="alert-locations" id="event-locations">Locations</div>
                 <div class="alert-hazards">
-                    <span class="hazard" id="custom-alert-hail">Hail: --</span>
-                    <span class="hazard" id="custom-alert-wind">Wind: --</span>
+                    <span class="hazard" id="event-max-hail">Hail: --</span>
+                    <span class="hazard" id="event-max-wind">Wind: --</span>
                 </div>
             </div>
         </div>
@@ -28,12 +28,7 @@
             document.addEventListener('onCacheUpdate', async (event) => {
                 let storage = alert_class.syncAlerts();
                 if (storage.length > 0) {
-                    // Use the most recent alert
-                    const alert = storage[0];
-                    document.getElementById('custom-alert-type').textContent = alert.details?.name || 'ALERT';
-                    document.getElementById('custom-alert-locations').textContent = alert.details?.locations || 'Locations';
-                    document.getElementById('custom-alert-hail').textContent = 'Hail: ' + (alert.details?.hail || '--');
-                    document.getElementById('custom-alert-wind').textContent = 'Wind: ' + (alert.details?.wind || '--');
+                    await alert_class.triggerAlertQueue();
                 }
             });
         });
