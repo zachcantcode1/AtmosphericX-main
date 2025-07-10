@@ -30,10 +30,10 @@
                 if (storage.length > 0) {
                     // Use the most recent alert
                     const alert = storage[0];
-                    document.getElementById('custom-alert-type').textContent = alert.event || 'ALERT';
-                    document.getElementById('custom-alert-locations').textContent = alert.location || 'Locations';
-                    document.getElementById('custom-alert-hail').textContent = 'Hail: ' + (alert.max_hail || '--');
-                    document.getElementById('custom-alert-wind').textContent = 'Wind: ' + (alert.max_wind || '--');
+                    document.getElementById('custom-alert-type').textContent = alert.details?.type || 'ALERT';
+                    document.getElementById('custom-alert-locations').textContent = alert.details?.locations || 'Locations';
+                    document.getElementById('custom-alert-hail').textContent = 'Hail: ' + (alert.details?.hail || '--');
+                    document.getElementById('custom-alert-wind').textContent = 'Wind: ' + (alert.details?.wind || '--');
                 }
             });
         });
