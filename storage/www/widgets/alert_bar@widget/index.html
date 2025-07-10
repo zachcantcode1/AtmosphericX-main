@@ -35,10 +35,18 @@
             function updateAlertBar() {
                 // Get the most recent alert from the websocket storage
                 let storage = alert_class.syncAlerts();
-                if (!storage || storage.length === 0) return;
+                console.log('Alert storage:', storage);
+                if (!storage || storage.length === 0) {
+                    document.getElementById('event-name').textContent = 'NO ACTIVE ALERT';
+                    document.getElementById('event-locations').textContent = '';
+                    document.getElementById('event-threats').textContent = '';
+                    document.getElementById('event-source').textContent = '';
+                    return;
+                }
                 let alert = storage[0];
+                console.log('Most recent alert:', alert);
                 // Set alert type (event name)
-                document.getElementById('event-name').textContent = (alert.event || '').toUpperCase();
+                document.getElementById('event-name').textContent = (alert.event || 'UNKNOWN ALERT').toUpperCase();
                 // Set locations (join with bullet or dot)
                 let locations = Array.isArray(alert.locations) ? alert.locations.join(' • ') : (alert.locations || '');
                 document.getElementById('event-locations').textContent = locations.toUpperCase();
@@ -50,7 +58,7 @@
                 if (alert.damage) threats.push(alert.damage);
                 document.getElementById('event-threats').textContent = (threats.join(' AND ') || (alert.threats || '')).toUpperCase();
                 // Set source
-                document.getElementById('event-source').textContent = (alert.source || alert.sender || '').toUpperCase();
+                document.getElementById('event-source').textContent = (alert.source || alert.sender || 'UNKNOWN').toUpperCase();
             }
             updateAlertBar();
             document.addEventListener('onCacheUpdate', updateAlertBar);
