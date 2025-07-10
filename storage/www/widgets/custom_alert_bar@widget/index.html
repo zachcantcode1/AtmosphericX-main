@@ -10,43 +10,11 @@
     </head>
     <body>
         <div class="alert-box">
-            <div class="alert-header"><span id="event-name"></span></div>
-            <div class="alert-body">
-                <div class="row-dark">
-                    <div class="left">
-                        <div>LOCATIONS INCLUDE: <span id="event-locations"></span></div>
-                    </div>
-                    <div class="right">
-                        <div>ISSUED: <span id="event-issued-time"></span></div>
-                    </div>
-                </div>
-                <div class="row-light">
-                    <div class="left">
-                        <div>HAIL: <span id="event-max-hail"></span></div>
-                    </div>
-                    <div class="left">
-                        <div>WIND: <span id="event-max-wind"></span></div>
-                    </div>
-                    <div class="left">
-                        <div>TOR: <span id="event-tornado"></span></div>
-                    </div>
-                    <div class="right">
-                        <div>DMG: <span id="event-damage"></span></div>
-                    </div>
-                    <div class="right">
-                        <div>EXPIRES: <span id="event-expires-time"></span></div>
-                    </div>
-                </div>
-                <div class="row-dark">
-                    <div class="left">
-                        <div>OFFICE: <span id="event-sender"></span></div>
-                    </div>
-                </div>
-                <div class="row-light">
-                    <div class="left">
-                        <div>TAGS: <span id="event-tags"></span></div>
-                    </div>
-                </div>
+            <div class="alert-body linear-row">
+                <div class="alert-title" id="event-name"></div>
+                <div class="alert-location">Location: <span id="event-locations"></span></div>
+                <div class="alert-hail">Hail: <span id="event-max-hail"></span></div>
+                <div class="alert-wind">Wind: <span id="event-max-wind"></span></div>
             </div>
         </div>
     </body>
