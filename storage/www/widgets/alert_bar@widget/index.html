@@ -23,6 +23,7 @@
                     <span id="event-source"></span>
                 </div>
             </div>
+            <div id="alert-error" style="color:red; font-weight:bold; display:none; padding:0.5em 1em;"></div>
         </div>
     </body>
     <script src="../../assets/javascript/alerts.js"></script>
@@ -33,32 +34,35 @@
             let alert_class = new Alerts(library, true);
             library.detectMobileDevice();
             function updateAlertBar() {
-                // Get the most recent alert from the websocket storage
-                let storage = alert_class.syncAlerts();
-                console.log('Alert storage:', storage);
-                if (!storage || storage.length === 0) {
-                    document.getElementById('event-name').textContent = 'NO ACTIVE ALERT';
-                    document.getElementById('event-locations').textContent = '';
-                    document.getElementById('event-threats').textContent = '';
-                    document.getElementById('event-source').textContent = '';
-                    return;
+                try {
+                    let storage = alert_class.syncAlerts();
+                    console.log('Alert storage:', storage);
+                    if (!storage || storage.length === 0) {
+                        document.getElementById('event-name').textContent = 'NO ACTIVE ALERT';
+                        document.getElementById('event-locations').textContent = '';
+                        document.getElementById('event-threats').textContent = '';
+                        document.getElementById('event-source').textContent = '';
+                        document.getElementById('alert-error').style.display = 'none';
+                        return;
+                    }
+                    let alert = storage[0];
+                    console.log('Most recent alert:', alert);
+                    document.getElementById('event-name').textContent = (alert.event || 'UNKNOWN ALERT').toUpperCase();
+                    let locations = Array.isArray(alert.locations) ? alert.locations.join(' • ') : (alert.locations || '');
+                    document.getElementById('event-locations').textContent = locations.toUpperCase();
+                    let threats = [];
+                    if (alert.max_wind) threats.push(alert.max_wind);
+                    if (alert.max_hail) threats.push(alert.max_hail);
+                    if (alert.tornado) threats.push(alert.tornado);
+                    if (alert.damage) threats.push(alert.damage);
+                    document.getElementById('event-threats').textContent = (threats.join(' AND ') || (alert.threats || '')).toUpperCase();
+                    document.getElementById('event-source').textContent = (alert.source || alert.sender || 'UNKNOWN').toUpperCase();
+                    document.getElementById('alert-error').style.display = 'none';
+                } catch (e) {
+                    document.getElementById('alert-error').textContent = 'ALERT BAR ERROR: ' + e;
+                    document.getElementById('alert-error').style.display = 'block';
+                    console.error('ALERT BAR ERROR:', e);
                 }
-                let alert = storage[0];
-                console.log('Most recent alert:', alert);
-                // Set alert type (event name)
-                document.getElementById('event-name').textContent = (alert.event || 'UNKNOWN ALERT').toUpperCase();
-                // Set locations (join with bullet or dot)
-                let locations = Array.isArray(alert.locations) ? alert.locations.join(' • ') : (alert.locations || '');
-                document.getElementById('event-locations').textContent = locations.toUpperCase();
-                // Set threats (combine wind/hail/tornado/damage if available)
-                let threats = [];
-                if (alert.max_wind) threats.push(alert.max_wind);
-                if (alert.max_hail) threats.push(alert.max_hail);
-                if (alert.tornado) threats.push(alert.tornado);
-                if (alert.damage) threats.push(alert.damage);
-                document.getElementById('event-threats').textContent = (threats.join(' AND ') || (alert.threats || '')).toUpperCase();
-                // Set source
-                document.getElementById('event-source').textContent = (alert.source || alert.sender || 'UNKNOWN').toUpperCase();
             }
             updateAlertBar();
             document.addEventListener('onCacheUpdate', updateAlertBar);
