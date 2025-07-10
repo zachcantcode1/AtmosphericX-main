@@ -14,47 +14,47 @@
             <div class="alert-body">
                 <div class="row-dark">
                     <div class="left">
-                        <div>Location: <span id="event-locations"></span></div>
+                        <div>LOCATIONS INCLUDE: <span id="event-locations"></span></div>
                     </div>
                     <div class="right">
-                        <div id="event-issued-time"></div>
+                        <div>ISSUED: <span id="event-issued-time"></span></div>
                     </div>
                 </div>
                 <div class="row-light">
                     <div class="left">
-                        <div>Hail: <span id="event-max-hail"></span></div>
+                        <div>HAIL: <span id="event-max-hail"></span></div>
                     </div>
                     <div class="left">
-                        <div>Wind: <span id="event-max-wind"></span></div>
+                        <div>WIND: <span id="event-max-wind"></span></div>
                     </div>
                     <div class="left">
-                        <div id="event-tornado"></div>
+                        <div>TOR: <span id="event-tornado"></span></div>
                     </div>
                     <div class="right">
-                        <div id="event-damage"></div>
+                        <div>DMG: <span id="event-damage"></span></div>
                     </div>
                     <div class="right">
-                        <div id="event-expires-time"></div>
+                        <div>EXPIRES: <span id="event-expires-time"></span></div>
                     </div>
                 </div>
                 <div class="row-dark">
                     <div class="left">
-                        <div id="event-sender"></div>
+                        <div>OFFICE: <span id="event-sender"></span></div>
                     </div>
                 </div>
                 <div class="row-light">
                     <div class="left">
-                        <div id="event-tags"></div>
+                        <div>TAGS: <span id="event-tags"></span></div>
                     </div>
                 </div>
             </div>
             <!-- Overlay for modern bar layout -->
             <div class="alert-bar-overlay">
-                <div class="alert-bar-title"><span id="event-name"></span></div>
+                <div class="alert-bar-title"><span class="overlay-event-name"></span></div>
                 <div class="alert-bar-info">
-                    <span class="alert-location">Location: <span id="event-locations"></span></span>
-                    <span class="alert-hail">Hail: <span id="event-max-hail"></span></span>
-                    <span class="alert-wind">Wind: <span id="event-max-wind"></span></span>
+                    <span class="alert-location">Location: <span class="overlay-event-locations"></span></span>
+                    <span class="alert-hail">Hail: <span class="overlay-event-hail"></span></span>
+                    <span class="alert-wind">Wind: <span class="overlay-event-wind"></span></span>
                 </div>
             </div>
         </div>
@@ -71,5 +71,20 @@
                 }
             });
         });
+        // Overlay bar live update
+        function updateOverlay() {
+            document.querySelector('.overlay-event-name').textContent = document.getElementById('event-name').textContent;
+            document.querySelector('.overlay-event-locations').textContent = document.getElementById('event-locations').textContent;
+            document.querySelector('.overlay-event-hail').textContent = document.getElementById('event-max-hail').textContent;
+            document.querySelector('.overlay-event-wind').textContent = document.getElementById('event-max-wind').textContent;
+        }
+        // Observe changes to the original fields
+        const observer = new MutationObserver(updateOverlay);
+        ['event-name','event-locations','event-max-hail','event-max-wind'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el, { childList: true, subtree: true });
+        });
+        // Initial update
+        window.addEventListener('DOMContentLoaded', updateOverlay);
     </script>
 </html>

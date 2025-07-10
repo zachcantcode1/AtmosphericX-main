@@ -87,18 +87,17 @@ body, html {
     white-space: nowrap;
 }
 
-/* Remove the following rule to restore original DOM structure for JS compatibility */
-/*
+/* Visually suppress original rows but keep them in DOM for JS updates */
 .alert-header, .alert-body, .row-dark, .row-light, .left, .right {
-    visibility: hidden !important;
-    height: 0 !important;
-    min-height: 0 !important;
-    max-height: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    height: auto !important;
+    min-height: unset !important;
+    max-height: unset !important;
+    padding: unset !important;
+    margin: unset !important;
+    overflow: unset !important;
 }
-*/
 
 /* Hide all unused fields */
 #event-issued-time, #event-tornado, #event-damage, #event-expires-time, #event-sender, #event-tags {
