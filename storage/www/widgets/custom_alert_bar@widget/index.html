@@ -78,7 +78,7 @@
             document.querySelector('.overlay-event-locations').textContent = document.getElementById('event-locations').textContent;
             document.querySelector('.overlay-event-hail').textContent = document.getElementById('event-max-hail').textContent;
             document.querySelector('.overlay-event-wind').textContent = document.getElementById('event-max-wind').textContent;
-            fitTextToContainer(overlayTitle, 1.1, 0.6); // max 1.1em, min 0.6em
+            fitTextToContainer(overlayTitle, 1.5, 0.7); // max 1.5em, min 0.7em
         }
         // Observe changes to the original fields
         const observer = new MutationObserver(updateOverlay);
