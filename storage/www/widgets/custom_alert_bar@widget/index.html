@@ -73,10 +73,12 @@
         });
         // Overlay bar live update
         function updateOverlay() {
-            document.querySelector('.overlay-event-name').textContent = document.getElementById('event-name').textContent;
+            const overlayTitle = document.querySelector('.overlay-event-name');
+            overlayTitle.textContent = document.getElementById('event-name').textContent;
             document.querySelector('.overlay-event-locations').textContent = document.getElementById('event-locations').textContent;
             document.querySelector('.overlay-event-hail').textContent = document.getElementById('event-max-hail').textContent;
             document.querySelector('.overlay-event-wind').textContent = document.getElementById('event-max-wind').textContent;
+            fitTextToContainer(overlayTitle, 2.2, 1.1); // max 2.2em, min 1.1em
         }
         // Observe changes to the original fields
         const observer = new MutationObserver(updateOverlay);
@@ -86,5 +88,18 @@
         });
         // Initial update
         window.addEventListener('DOMContentLoaded', updateOverlay);
+
+        // Dynamically fit text to container width
+        function fitTextToContainer(element, maxEm, minEm) {
+            if (!element) return;
+            const parent = element.parentElement;
+            let fontSize = maxEm;
+            element.style.fontSize = fontSize + 'em';
+            element.style.whiteSpace = 'nowrap';
+            while (element.scrollWidth > parent.offsetWidth && fontSize > minEm) {
+                fontSize -= 0.05;
+                element.style.fontSize = fontSize + 'em';
+            }
+        }
     </script>
 </html>
