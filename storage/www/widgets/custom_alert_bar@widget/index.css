@@ -1,6 +1,6 @@
 body, html {
     width: 1920px;
-    height: 250px;
+    height: 80px;
     margin: 0;
     padding: 0;
     background: transparent;
@@ -9,7 +9,7 @@ body, html {
 
 .alert-box {
     width: 1920px;
-    height: 250px;
+    height: 80px;
     position: relative;
     background: linear-gradient(90deg, #ff6600 0%, #ffb347 100%);
     color: #fff;
