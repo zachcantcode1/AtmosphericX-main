@@ -46,7 +46,7 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background: #e65c00;
+    /* Remove hardcoded background, use class-based color below */
     color: #fff;
     font-size: 1.5em;
     font-weight: bold;
@@ -87,6 +87,27 @@ body, html {
     text-shadow: 1px 1px 6px #00000099;
     margin-right: 0;
     white-space: nowrap;
+}
+
+/* Dynamic color for title area based on alert type */
+.alert-box.severe .alert-bar-title {
+    background: #e65c00;
+}
+.alert-box.tornado .alert-bar-title {
+    background: #c80064;
+}
+.alert-box.special .alert-bar-title {
+    background: #0077b6;
+}
+.alert-box.flood .alert-bar-title {
+    background: #008c45;
+}
+.alert-box.advisory .alert-bar-title {
+    background: #b6a800;
+}
+.alert-box.default .alert-bar-title,
+.alert-bar-title {
+    background: #e65c00;
 }
 
 /* Visually suppress original rows but keep them in DOM for JS updates */
